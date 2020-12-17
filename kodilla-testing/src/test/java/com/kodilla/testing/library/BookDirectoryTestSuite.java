@@ -88,9 +88,9 @@ public class BookDirectoryTestSuite {
         List<Book> resultListOf0Books = new ArrayList<Book>();
         List<Book> resultListOfaBook = generateListOfNBooks(1);
         List<Book> resultListOf5Books = generateListOfNBooks(5);
-        when(libraryDatabaseMock.listBooksInHandsOf(user1)).thenReturn(resultListOf0Books);
-        when(libraryDatabaseMock.listBooksInHandsOf(user2)).thenReturn(resultListOfaBook);
-        when(libraryDatabaseMock.listBooksInHandsOf(user3)).thenReturn(resultListOf5Books);
+        when(libraryDatabaseMock.listBorrowedBy(user1)).thenReturn(resultListOf0Books);
+        when(libraryDatabaseMock.listBorrowedBy(user2)).thenReturn(resultListOfaBook);
+        when(libraryDatabaseMock.listBorrowedBy(user3)).thenReturn(resultListOf5Books);
         // When
         List<Book> theListOfBooks0 = bookLibrary.listBooksInHandsOf(user1);
         List<Book> theListOfBooks1 = bookLibrary.listBooksInHandsOf(user2);
