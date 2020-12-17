@@ -18,6 +18,12 @@ public class Triangle implements Shape {
         return Objects.hash(name);
     }
 
-    public String getShapeName() { return name; }
-    public float getShapeArea() { float area = 1; return area; }
+    public String getShapeName() {
+        return name;
+    }
+
+    public float getShapeArea() {
+        float area = 1;
+        return area;
+    }
 }
