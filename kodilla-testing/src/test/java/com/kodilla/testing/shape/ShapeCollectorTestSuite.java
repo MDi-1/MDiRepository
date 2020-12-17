@@ -1,4 +1,5 @@
 package com.kodilla.testing.shape;
+
 import org.junit.jupiter.api.*;
 
 @DisplayName("TDD: Shape collector test suite")
@@ -6,13 +7,21 @@ class ShapeCollectorTestSuite {
     private static int testCount = 0;
 
     @BeforeAll
-    public static void beforeAllTests() { System.out.println("This is the beginning of tests."); }
+    public static void beforeAllTests() {
+        System.out.println("This is the beginning of tests.");
+    }
 
     @AfterAll
-    public static void afterAllTests() { System.out.println("All tests are finished."); }
+    public static void afterAllTests() {
+        System.out.println("All tests are finished.");
+    }
 
     @BeforeEach
-    public void beforeEveryTest() { testCount++; System.out.println("Preparing to execute test #" + testCount); }
+    public void beforeEveryTest() {
+        testCount++;
+        System.out.println("Preparing to execute test #" + testCount);
+    }
+
     @Test
     void testAddFigure() {
         // Given
@@ -24,6 +33,7 @@ class ShapeCollectorTestSuite {
         // Then
         Assertions.assertEquals(3, collector.getShapesQuantity());
     }
+
     @Test
     void testRemoveFigure() {
         // Given
@@ -39,6 +49,7 @@ class ShapeCollectorTestSuite {
         // Then
         Assertions.assertEquals(2, collector.getShapesQuantity());
     }
+
     @Nested
     @DisplayName("TDD: Nested class just to incorporate a number of tests in it.")
     class InternalClass {
@@ -52,6 +63,7 @@ class ShapeCollectorTestSuite {
             // Then
             Assertions.assertEquals(shape, gotShape);
         }
+
         @Test
         void testShowFigures() {
             ShapeCollector collector = new ShapeCollector();
@@ -60,7 +72,7 @@ class ShapeCollectorTestSuite {
             collector.addFigure(new Square());
             collector.addFigure(new Circle());
             // Then
-            System.out.println(collector.showFigures());
+            Assertions.assertEquals("Triangle Square Circle ", collector.showFigures());
         }
     }
 }

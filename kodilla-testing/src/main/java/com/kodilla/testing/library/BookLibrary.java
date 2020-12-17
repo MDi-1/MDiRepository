@@ -4,7 +4,10 @@ import java.util.*;
 
 public class BookLibrary {
     private LibraryDatabase libraryDatabase;
-    public BookLibrary(LibraryDatabase libraryDatabase) { this.libraryDatabase = libraryDatabase; }
+
+    public BookLibrary(LibraryDatabase libraryDatabase) {
+        this.libraryDatabase = libraryDatabase;
+    }
 
     public List<Book> listBooksWithCondition(String titleFragment) {
         List<Book> bookList = new ArrayList<Book>();
@@ -13,5 +16,9 @@ public class BookLibrary {
         if (resultList.size() > 20) return bookList;
         bookList = resultList;
         return bookList;
+    }
+    public List<Book> listBooksInHandsOf(LibraryUser libraryUser) {
+        List<Book> resultList = libraryDatabase.listBooksInHandsOf(libraryUser);
+        return resultList;
     }
 }
