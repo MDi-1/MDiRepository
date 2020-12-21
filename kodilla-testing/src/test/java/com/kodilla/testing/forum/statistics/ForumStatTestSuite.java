@@ -28,69 +28,18 @@ public class ForumStatTestSuite {
 
     @Mock
     private Statistics statsMock;
+
     private final UserGenerator userGenerator = new UserGenerator();
     private int usersQuantity = 395;
     private int postQuantity = 1222;
     private int commentQuantity = 4888;
 
+    @DisplayName("initial conditions: 395 users; 0 posts; 4888 comments")
     @Test
     void testCalculateAdvStatistics1() throws IOException {
-        mainFunction(1);
-    }
 
-    @Test
-    void testCalculateAdvStatistics2() throws IOException {
-        mainFunction(2);
-    }
-
-    @Test
-    void testCalculateAdvStatistics3() throws IOException {
-        mainFunction(3);
-    }
-
-    @Test
-    void testCalculateAdvStatistics4() throws IOException {
-        mainFunction(4);
-    }
-
-    @Test
-    void testCalculateAdvStatistics5() throws IOException {
-        mainFunction(5);
-    }
-
-    @Test
-    void testCalculateAdvStatistics6() throws IOException {
-        mainFunction(6);
-    }
-
-    @Test
-    void testCalculateAdvStatistics7() throws IOException {
-        mainFunction(7);
-    }
-
-    void mainFunction(int i) throws IOException {
-        switch (i) {
-            case 1:
-                postQuantity = 0;
-                break;
-            case 2:
-                postQuantity = 1000;
-                break;
-            case 3:
-                commentQuantity = 0;
-                break;
-            case 4:
-                postQuantity = 30000;
-                break;
-            case 5:
-                break;
-            case 6:
-                usersQuantity = 0;
-                break;
-            case 7:
-                usersQuantity = 100;
-                break;
-        }
+        //Given
+        postQuantity = 0;
         float usersNum = usersQuantity;
         float postsNum = postQuantity;
         float comtsNum = commentQuantity;
@@ -102,9 +51,46 @@ public class ForumStatTestSuite {
         when(statsMock.usersNames()).thenReturn(userGenerator.consumeCsv(usersQuantity));
         when(statsMock.postsCount()).thenReturn(postQuantity);
         when(statsMock.commentsCount()).thenReturn(commentQuantity);
-        if (usersQuantity != 0) postsPerUser = postsNum / usersNum;
-        if (usersQuantity != 0) commentsPerUser = comtsNum / usersNum;
-        if (postQuantity != 0) commentsPerPost = comtsNum / postsNum;
+        postsPerUser = postsNum / usersNum;
+        commentsPerUser = comtsNum / usersNum;
+
+        //When
+        stat.calculateAdvStatistics(statsMock);
+        int usersCount = stat.getUsersAmount();
+        int postCount = stat.getPostsAmount();
+        int commentCount = stat.getCommentsAmount();
+        float avgPostPerUser = stat.getAveragePostsPerUser();
+        float avgComtsPerUser = stat.getAverageComtsPerUser();
+        stat.showStatistics();
+
+        //Then
+        assertEquals(usersQuantity, usersCount);
+        assertEquals(postQuantity, postCount);
+        assertEquals(commentQuantity, commentCount);
+        assertEquals(postsPerUser, avgPostPerUser);
+        assertEquals(commentsPerUser, avgComtsPerUser);
+    }
+
+    @DisplayName("initial conditions: 395 users; 1000 posts; 4888 comments")
+    @Test
+    void testCalculateAdvStatistics2() throws IOException {
+
+        //Given
+        postQuantity = 1000;
+        float usersNum = usersQuantity;
+        float postsNum = postQuantity;
+        float comtsNum = commentQuantity;
+        float postsPerUser = 0;
+        float commentsPerUser = 0;
+        float commentsPerPost = 0;
+
+        Stat stat = new Stat(statsMock);
+        when(statsMock.usersNames()).thenReturn(userGenerator.consumeCsv(usersQuantity));
+        when(statsMock.postsCount()).thenReturn(postQuantity);
+        when(statsMock.commentsCount()).thenReturn(commentQuantity);
+        postsPerUser = postsNum / usersNum;
+        commentsPerUser = comtsNum / usersNum;
+        commentsPerPost = comtsNum / postsNum;
 
         //When
         stat.calculateAdvStatistics(statsMock);
@@ -120,8 +106,198 @@ public class ForumStatTestSuite {
         assertEquals(usersQuantity, usersCount);
         assertEquals(postQuantity, postCount);
         assertEquals(commentQuantity, commentCount);
-        if (usersQuantity != 0) assertEquals(postsPerUser, avgPostPerUser);
-        if (usersQuantity != 0) assertEquals(commentsPerUser, avgComtsPerUser);
-        if (postQuantity != 0) assertEquals(commentsPerPost, avgComtsPerPost);
+        assertEquals(postsPerUser, avgPostPerUser);
+        assertEquals(commentsPerUser, avgComtsPerUser);
+        assertEquals(commentsPerPost, avgComtsPerPost);
+    }
+
+    @DisplayName("initial conditions: 395 users; 1222 posts; 0 comments")
+    @Test
+    void testCalculateAdvStatistics3() throws IOException {
+
+        //Given
+        commentQuantity = 0;
+        float usersNum = usersQuantity;
+        float postsNum = postQuantity;
+        float comtsNum = commentQuantity;
+        float postsPerUser = 0;
+        float commentsPerUser = 0;
+        float commentsPerPost = 0;
+
+        Stat stat = new Stat(statsMock);
+        when(statsMock.usersNames()).thenReturn(userGenerator.consumeCsv(usersQuantity));
+        when(statsMock.postsCount()).thenReturn(postQuantity);
+        when(statsMock.commentsCount()).thenReturn(commentQuantity);
+        postsPerUser = postsNum / usersNum;
+        commentsPerUser = comtsNum / usersNum;
+        commentsPerPost = comtsNum / postsNum;
+
+        //When
+        stat.calculateAdvStatistics(statsMock);
+        int usersCount = stat.getUsersAmount();
+        int postCount = stat.getPostsAmount();
+        int commentCount = stat.getCommentsAmount();
+        float avgPostPerUser = stat.getAveragePostsPerUser();
+        float avgComtsPerUser = stat.getAverageComtsPerUser();
+        float avgComtsPerPost = stat.getAverageComtsPerPost();
+        stat.showStatistics();
+
+        //Then
+        assertEquals(usersQuantity, usersCount);
+        assertEquals(postQuantity, postCount);
+        assertEquals(commentQuantity, commentCount);
+        assertEquals(postsPerUser, avgPostPerUser);
+        assertEquals(commentsPerUser, avgComtsPerUser);
+        assertEquals(commentsPerPost, avgComtsPerPost);
+    }
+
+    @DisplayName("initial conditions: 395 users; 30000 posts; 4888 comments")
+    @Test
+    void testCalculateAdvStatistics4() throws IOException {
+
+        //Given
+        postQuantity = 30000;
+        float usersNum = usersQuantity;
+        float postsNum = postQuantity;
+        float comtsNum = commentQuantity;
+        float postsPerUser = 0;
+        float commentsPerUser = 0;
+        float commentsPerPost = 0;
+
+        Stat stat = new Stat(statsMock);
+        when(statsMock.usersNames()).thenReturn(userGenerator.consumeCsv(usersQuantity));
+        when(statsMock.postsCount()).thenReturn(postQuantity);
+        when(statsMock.commentsCount()).thenReturn(commentQuantity);
+        postsPerUser = postsNum / usersNum;
+        commentsPerUser = comtsNum / usersNum;
+        commentsPerPost = comtsNum / postsNum;
+
+        //When
+        stat.calculateAdvStatistics(statsMock);
+        int usersCount = stat.getUsersAmount();
+        int postCount = stat.getPostsAmount();
+        int commentCount = stat.getCommentsAmount();
+        float avgPostPerUser = stat.getAveragePostsPerUser();
+        float avgComtsPerUser = stat.getAverageComtsPerUser();
+        float avgComtsPerPost = stat.getAverageComtsPerPost();
+        stat.showStatistics();
+
+        //Then
+        assertEquals(usersQuantity, usersCount);
+        assertEquals(postQuantity, postCount);
+        assertEquals(commentQuantity, commentCount);
+        assertEquals(postsPerUser, avgPostPerUser);
+        assertEquals(commentsPerUser, avgComtsPerUser);
+        assertEquals(commentsPerPost, avgComtsPerPost);
+    }
+
+    @DisplayName("initial conditions: 395 users; 1222 posts; 4888 comments")
+    @Test
+    void testCalculateAdvStatistics5() throws IOException {
+
+        //Given
+        float usersNum = usersQuantity;
+        float postsNum = postQuantity;
+        float comtsNum = commentQuantity;
+        float postsPerUser = 0;
+        float commentsPerUser = 0;
+        float commentsPerPost = 0;
+
+        Stat stat = new Stat(statsMock);
+        when(statsMock.usersNames()).thenReturn(userGenerator.consumeCsv(usersQuantity));
+        when(statsMock.postsCount()).thenReturn(postQuantity);
+        when(statsMock.commentsCount()).thenReturn(commentQuantity);
+        postsPerUser = postsNum / usersNum;
+        commentsPerUser = comtsNum / usersNum;
+        commentsPerPost = comtsNum / postsNum;
+
+        //When
+        stat.calculateAdvStatistics(statsMock);
+        int usersCount = stat.getUsersAmount();
+        int postCount = stat.getPostsAmount();
+        int commentCount = stat.getCommentsAmount();
+        float avgPostPerUser = stat.getAveragePostsPerUser();
+        float avgComtsPerUser = stat.getAverageComtsPerUser();
+        float avgComtsPerPost = stat.getAverageComtsPerPost();
+        stat.showStatistics();
+
+        //Then
+        assertEquals(usersQuantity, usersCount);
+        assertEquals(postQuantity, postCount);
+        assertEquals(commentQuantity, commentCount);
+        assertEquals(postsPerUser, avgPostPerUser);
+        assertEquals(commentsPerUser, avgComtsPerUser);
+        assertEquals(commentsPerPost, avgComtsPerPost);
+    }
+
+    @DisplayName("initial conditions: 0 users; 1222 posts; 4888 comments")
+    @Test
+    void testCalculateAdvStatistics6() throws IOException {
+
+        //Given
+        usersQuantity = 0;
+        float postsNum = postQuantity;
+        float comtsNum = commentQuantity;
+        float commentsPerPost = 0;
+
+        Stat stat = new Stat(statsMock);
+        when(statsMock.usersNames()).thenReturn(userGenerator.consumeCsv(usersQuantity));
+        when(statsMock.postsCount()).thenReturn(postQuantity);
+        when(statsMock.commentsCount()).thenReturn(commentQuantity);
+        commentsPerPost = comtsNum / postsNum;
+
+        //When
+        stat.calculateAdvStatistics(statsMock);
+        int usersCount = stat.getUsersAmount();
+        int postCount = stat.getPostsAmount();
+        int commentCount = stat.getCommentsAmount();
+        float avgComtsPerPost = stat.getAverageComtsPerPost();
+        stat.showStatistics();
+
+        //Then
+        assertEquals(usersQuantity, usersCount);
+        assertEquals(postQuantity, postCount);
+        assertEquals(commentQuantity, commentCount);
+        assertEquals(commentsPerPost, avgComtsPerPost);
+    }
+
+    @DisplayName("initial conditions: 100 users; 1222 posts; 4888 comments")
+    @Test
+    void testCalculateAdvStatistics7() throws IOException {
+
+        //Given
+        usersQuantity = 100;
+        float usersNum = usersQuantity;
+        float postsNum = postQuantity;
+        float comtsNum = commentQuantity;
+        float postsPerUser = 0;
+        float commentsPerUser = 0;
+        float commentsPerPost = 0;
+
+        Stat stat = new Stat(statsMock);
+        when(statsMock.usersNames()).thenReturn(userGenerator.consumeCsv(usersQuantity));
+        when(statsMock.postsCount()).thenReturn(postQuantity);
+        when(statsMock.commentsCount()).thenReturn(commentQuantity);
+        postsPerUser = postsNum / usersNum;
+        commentsPerUser = comtsNum / usersNum;
+        commentsPerPost = comtsNum / postsNum;
+
+        //When
+        stat.calculateAdvStatistics(statsMock);
+        int usersCount = stat.getUsersAmount();
+        int postCount = stat.getPostsAmount();
+        int commentCount = stat.getCommentsAmount();
+        float avgPostPerUser = stat.getAveragePostsPerUser();
+        float avgComtsPerUser = stat.getAverageComtsPerUser();
+        float avgComtsPerPost = stat.getAverageComtsPerPost();
+        stat.showStatistics();
+
+        //Then
+        assertEquals(usersQuantity, usersCount);
+        assertEquals(postQuantity, postCount);
+        assertEquals(commentQuantity, commentCount);
+        assertEquals(postsPerUser, avgPostPerUser);
+        assertEquals(commentsPerUser, avgComtsPerUser);
+        assertEquals(commentsPerPost, avgComtsPerPost);
     }
 }
