@@ -1,13 +1,11 @@
 package com.kodilla.stream;
 import com.kodilla.stream.beautifier.PoemBeautifier;
-
 import com.kodilla.stream.lambda.ExpressionExecutor;
 import com.kodilla.stream.reference.FunctionalCalculator;
 
 public class StreamMain {
 
     public static void main(String[] args) {
-
 
         ExpressionExecutor expressionExecutor = new ExpressionExecutor();
         System.out.println("Calculating expressions with lambdas");
@@ -22,11 +20,11 @@ public class StreamMain {
         expressionExecutor.executeExpression(3, 4, FunctionalCalculator::subBFromA);
         expressionExecutor.executeExpression(3, 4, FunctionalCalculator::divideAByB);
 
-
         PoemBeautifier beautifier = new PoemBeautifier();
+        beautifier.beautify("\n\n---- Starting execution of Kodilla exercise 7.1 ----\n", txt -> txt);
         beautifier.beautify("This is just sample text for Poem Beautifier.", txt -> txt.toUpperCase());
         beautifier.beautify("This is just sample text for Poem Beautifier.", txt -> txt.toLowerCase());
         beautifier.beautify("This is just sample text for Poem Beautifier.", txt -> txt.replace(" ", "_"));
-
+        beautifier.beautify("This is just sample text for Poem Beautifier.", txt -> " --== " + txt + " ==-- ");
     }
 }
