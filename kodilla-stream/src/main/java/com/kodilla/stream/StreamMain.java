@@ -8,6 +8,7 @@ import com.kodilla.stream.iterate.NumbersGenerator;
 import com.kodilla.stream.lambda.ExpressionExecutor;
 import com.kodilla.stream.person.People;
 import com.kodilla.stream.reference.FunctionalCalculator;
+import com.kodilla.stream.world.World;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -62,7 +63,6 @@ public class StreamMain {
                 .forEach(System.out::println);
 
          */
-
 
         // exercise 7.3
         Forum forum = new Forum();
