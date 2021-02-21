@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class StreamMain {
 
     public static void main(String[] args) {
-        /*
+
         ExpressionExecutor expressionExecutor = new ExpressionExecutor();
         System.out.println("Calculating expressions with lambdas");
         expressionExecutor.executeExpression(10, 5, (a, b) -> a + b);
@@ -34,14 +34,14 @@ public class StreamMain {
         expressionExecutor.executeExpression(3, 4, FunctionalCalculator::divideAByB);
 
         PoemBeautifier beautifier = new PoemBeautifier();
-        beautifier.beautify("\n\n---- Starting execution of Kodilla exercise 7.1 ----\n", txt -> txt);
+        beautifier.beautify("\n\n\n---- Starting execution of Kodilla exercise 7.1 ----\n", txt -> txt);
         beautifier.beautify("This is just sample text for Poem Beautifier.", txt -> txt.toUpperCase());
         beautifier.beautify("This is just sample text for Poem Beautifier.", txt -> txt.toLowerCase());
         beautifier.beautify("This is just sample text for Poem Beautifier.", txt -> txt.replace(" ", "_"));
-        beautifier.beautify("This is just sample text for Poem Beautifier.", txt -> " --== " + txt + " ==-- ");
+        beautifier.beautify("This is just sample text for Poem Beautifier.", txt -> " --== " +txt+ " ==-- ");
 
 
-        System.out.println("\nUsing Stream to generate even numbers from 1 to 20");
+        System.out.println("\n\n\nUsing Stream to generate even numbers from 1 to 20");
         NumbersGenerator.generateEven(20);
 
         People.getList().stream()
@@ -62,13 +62,13 @@ public class StreamMain {
                 .map(entry -> entry.getKey() + ": " + entry.getValue())                   // [3]
                 .forEach(System.out::println);
 
-         */
+
 
         // exercise 7.3
         Forum forum = new Forum();
         try { forum.generate(); } catch (IOException e) { e.printStackTrace(); }
 
-        System.out.println("\nGenerated user list of the forum - exercise 7.3 :");
+        System.out.println("\n\nGenerated user list of the forum - exercise 7.3 :");
         forum.getUserList().stream()
                 .forEach(System.out::println);
 

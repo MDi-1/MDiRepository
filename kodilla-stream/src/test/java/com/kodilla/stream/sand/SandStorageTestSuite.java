@@ -1,6 +1,6 @@
 package com.kodilla.stream.sand;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SandStorageTestSuite {
     @Test
-    void testGetSandBeansQuantity() {
+    public void testGetSandBeansQuantity() {
         //Given
         List<SandStorage> continents = new ArrayList<>();
         continents.add(new Europe());
