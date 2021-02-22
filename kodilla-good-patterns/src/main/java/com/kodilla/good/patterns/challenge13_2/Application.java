@@ -12,10 +12,7 @@ public class Application {
                 @Override
                 public void sendNotification(Customer customer) {}
             },
-            new OrderingService() {
-            @Override
-            public boolean order(Customer customer, int productId, float price, LocalDateTime date) { return false; }
-            },
+            new ProductOrderService(),
             new OrderRepository() {
             @Override
             public void putOrder(Customer customer, int productId, LocalDateTime date) {}
