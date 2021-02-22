@@ -1,0 +1,7 @@
+package com.kodilla.good.patterns.challenge13_2;
+
+import java.time.LocalDateTime;
+
+public interface OrderingService {
+    boolean order(Customer customer, int productId ,float price, LocalDateTime deliveryDate);
+}
