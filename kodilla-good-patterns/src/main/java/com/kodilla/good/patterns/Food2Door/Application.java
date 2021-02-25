@@ -1,10 +1,12 @@
+package com.kodilla.good.patterns.Food2Door;
+
 interface Supplier{
 
     // realizacja zamówienia w danym sklepie
-    void process();
+    void process(ProductOrder order);
 
     // czy udało się zrealizować i tym podobne informacje
-    void confirm();
+    ProductOrder confirm(ProductOrder order);
 }
 
 class Retriever {
@@ -22,6 +24,38 @@ class ProductOrder {
     private boolean paid;
     private String address;
     private boolean orderPassed;
+
+    public ProductOrder(Purchaser purcahser, Product product, boolean paid, String address, boolean orderPassed) {
+        this.purcahser = purcahser;
+        this.product = product;
+        this.paid = paid;
+        this.address = address;
+        this.orderPassed = orderPassed;
+    }
+
+    public Purchaser getPurcahser() {
+        return purcahser;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public boolean isOrderPassed() {
+        return orderPassed;
+    }
+
+    public void setOrderPassed(boolean orderPassed) {
+        this.orderPassed = orderPassed;
+    }
 }
 
 class Purchaser {
@@ -36,31 +70,53 @@ class Product {
 
 class Library {
 
-    double getPrice(ProductOrder order) {}
-    int getDeliveryTime(ProductOrder order) {}
-    boolean getPaidStatus(ProductOrder order) {}
-    boolean isAccountValid(ProductOrder order) {}
-    boolean isProductAvailable(ProductOrder order) {}
-    boolean canDeliverToLocation(ProductOrder order) {}
+    double getPrice(ProductOrder order) {
+        double price = 0;
+        return price;
+    }
+
+    int getDeliveryTime(ProductOrder order) {
+        int time = 0; // days
+        return time;
+    }
+
+    boolean getPaidStatus(ProductOrder order) {
+        return false;
+    }
+
+    boolean isAccountValid(ProductOrder order) {
+        return false;
+    }
+
+    boolean isProductAvailable(ProductOrder order) {
+        return false;
+    }
+
+    boolean canDeliverToLocation(ProductOrder order) {
+        return false;
+    }
+
     void sendOrderObjectToSupplier(ProductOrder order) {}
 
 }
 
 class ExtraFoodShop implements Supplier {
+    Communications communications = new Communications();
+    Library lib = new Library();
+
     private ProductOrder orderInProcess = null; // czy to potrzebne?
 
     // teraz piszemy tą f. jako prototyp
-    void process(ProductOrder order){
-        boolean accepted = lib.getPaidStatus() && lib.isAccountValid() && isProductAvailable();
+    public void process(ProductOrder order){
+        boolean accepted = lib.getPaidStatus(order) && lib.isAccountValid(order) && lib.isProductAvailable(order);
         if (accepted) {
             confirm(order);
         } else {
-            order.setOrderPassed(false);
+            communications.reject(order);
         }
     }
 
-    ProductOrder confirm(ProductOrder order) {
-        Communications communications = new Communications();
+    public ProductOrder confirm(ProductOrder order) {
         Archive archive = new Archive();
 
         order.setOrderPassed(true);
@@ -81,7 +137,7 @@ public class Application {
         System.out.println("Item: " + product + " cost: " + price +
                 " has been ordered by " + name + " " + surname +
                 ". Address of delivery: " + address);
-        return order
+        return order;
     }
 
     public static void main(String[] args) {
@@ -93,10 +149,11 @@ public class Application {
     }
 }
 
-interface Communications {
-    void sendMessages();
+class Communications {
+    void reject(ProductOrder order) {}
+    void sendMessages() {}
 }
 
 class Archive {
-    void sendToArchive();
+    void sendToArchive() {}
 }
