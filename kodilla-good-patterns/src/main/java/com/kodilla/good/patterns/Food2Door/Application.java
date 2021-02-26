@@ -2,18 +2,16 @@ package com.kodilla.good.patterns.Food2Door;
 
 interface Supplier{
 
-    // realizacja zamówienia w danym sklepie
     void process(ProductOrder order);
-
-    // czy udało się zrealizować i tym podobne informacje
     ProductOrder confirm(ProductOrder order);
+    ProductOrder getOrderProcessed();
 }
 
 class Retriever {
     ProductOrder retrieve() {
-        Purchaser buyer = new Purchaser( purchaser_args );
-        // purchase details
-        return new ProductOrder( order_args );
+        Purchaser buyer = new Purchaser("John Doe", "SomeTown SomeStreet");
+        Product product = new Product("Example Product", 4.44f);
+        return new ProductOrder(buyer, product, true, buyer.getAddress(), false);
     }
 }
 
@@ -68,7 +66,12 @@ class Product {
     private double price;
 }
 
+//zastanowić się czy klasy producentów nie powinny dziedziczyć po klasie Library
 class Library {
+
+    void reject(ProductOrder order) {
+
+    }
 
     double getPrice(ProductOrder order) {
         double price = 0;
@@ -98,40 +101,86 @@ class Library {
 
     void sendOrderObjectToSupplier(ProductOrder order) {}
 
+    int evaluateBestSupplier(ProductOrder order) {}
 }
 
-class ExtraFoodShop implements Supplier {
-    Communications communications = new Communications();
-    Library lib = new Library();
+class ExtraFoodShop implements Supplier {                       // supplier #1
 
-    private ProductOrder orderInProcess = null; // czy to potrzebne?
+    private Communications communications = new Communications();
+    private Library lib = new Library();
+    private ProductOrder orderProcessed = null;
 
     // teraz piszemy tą f. jako prototyp
     public void process(ProductOrder order){
         boolean accepted = lib.getPaidStatus(order) && lib.isAccountValid(order) && lib.isProductAvailable(order);
         if (accepted) {
-            confirm(order);
+            this.orderProcessed = confirm(order);
         } else {
-            communications.reject(order);
+            lib.reject(order);
         }
     }
 
     public ProductOrder confirm(ProductOrder order) {
-        Archive archive = new Archive();
-
         order.setOrderPassed(true);
         communications.sendMessages();
-        archive.sendToArchive();
+        new Archive().sendToArchive();
+    }
+
+    public ProductOrder getOrderProcessed() {
+        return orderProcessed;
     }
 }
 
-class HealthyShop implements Supplier {}
-class GlutenFreeShop implements Supplier {}
+class HealthyShop implements Supplier {                         // supplier #2
+
+    private Communications communications = new Communications();
+    private Library lib = new Library();
+    private ProductOrder orderProcessed = null;
+
+    public void process(ProductOrder order){
+        this.orderProcessed = confirm(order);
+    }
+
+    public ProductOrder confirm(ProductOrder order) {
+        order.setOrderPassed(true);
+        communications.sendMessages();
+        new Archive().sendToArchive();
+    }
+
+    public ProductOrder getOrderProcessed() {
+        return orderProcessed;
+    }
+}
+
+class GlutenFreeShop implements Supplier {                      // supplier #3
+
+    private Communications communications = new Communications();
+    private Library lib = new Library();
+    private ProductOrder orderProcessed = null;
+
+    public void process(ProductOrder order){
+        boolean accepted = lib.isProductAvailable(order) && lib.isAccountValid(order) && lib.canDeliverToLocation(order);
+        if (accepted) {
+            this.orderProcessed = confirm(order);
+        } else {
+            lib.reject(order);
+        }
+    }
+
+    public ProductOrder confirm(ProductOrder order) {
+        order.setOrderPassed(true);
+        communications.sendMessages();
+        new Archive().sendToArchive();
+    }
+
+    public ProductOrder getOrderProcessed() {
+        return orderProcessed;
+    }
+}
 
 public class Application {
-
-    void some_function1() {                     // 2 B deleted?
-    }
+    Library lib = new Library();
+    Supplier supplier;
 
     ProductOrder makeOrder(ProductOrder order) {
         System.out.println("Item: " + product + " cost: " + price +
@@ -140,20 +189,47 @@ public class Application {
         return order;
     }
 
-    public static void main(String[] args) {
-        System.out.println("\nKodilla exercise 13.4: Food2Door");
-        Application app = new Application();
-        ProductOrder orderQuery = new Retriever().retrieve();
-        ProductOrder orderRequested = app.makeOrder(orderQuery);
+    Supplier selectSupplier() {
+        switch (lib.evaluateBestSupplier(ProductOrder order)) {
+            case 1:
+                supplier = new ExtraFoodShop();
+                break;
+            case 2:
+                supplier = new HealthyShop();
+                break;
+            case 3:
+                supplier = new GlutenFreeShop();
+                break;
+        } return supplier;
+    }
 
+    public static void main(String[] args) {
+        ProductOrder orderQuery, orderRequested, orderResult;
+        Application app = new Application();
+        Supplier supplier;
+
+        System.out.println("\nKodilla exercise 13.4: Food2Door");
+        orderQuery = new Retriever().retrieve();
+        orderRequested = app.makeOrder(orderQuery);
+        supplier = selectSupplier();
+        supplier.process(orderRequested);
+        orderResult = getOrderProcessed();
+
+        System.out.println(orderResult);
     }
 }
 
 class Communications {
-    void reject(ProductOrder order) {}
     void sendMessages() {}
 }
 
 class Archive {
     void sendToArchive() {}
 }
+// Pytanie do mentora: W jakie mogłyby być sposoby na
+// ODP - jeśli klient wciśnie to -> to użyj obiektu klasy dostawcy takiego albo jeśli cena jest najniższa u tego to użyj obiektu klasy dostawcy takiego.
+// Jednak... czy da się w przypadku takim: Interface object = new ClassName();
+// podać w jakiś sposób odpowiedniego dostawcę jako ClassName? bez potrzeby
+// pamiętania o tym że trzeba modyfikować metodę
+// int evaluateBestSupplier(ProductOrder order) oprócz dopisywania klas interfejsu
+// Supplier w momencie gdy trzeba będzie dopisać nowych dostawców?
