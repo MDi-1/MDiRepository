@@ -15,25 +15,10 @@ public final class Book {
         this.publicationDate = publicationDate;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public LocalDate getPublicationDate() {
-        return publicationDate;
-    }
-
     @Override
     public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", publicationDate=" + publicationDate +
-                '}';
+        return "Book{" + "title='" + title + '\'' + ", author='" + author + '\'' +
+                ", publicationDate=" + publicationDate + '}';
     }
 
     @Override

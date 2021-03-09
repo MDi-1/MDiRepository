@@ -26,10 +26,6 @@ public final class Library extends Prototype<Library> {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public Set<Book> getBooks() {
         return books;
     }
@@ -40,9 +36,6 @@ public final class Library extends Prototype<Library> {
 
     @Override
     public String toString() {
-        return "Library{" +
-                "name='" + name + '\'' +
-                ", books=" + books +
-                '}';
+        return "Library{" + "name='" + name + '\'' + ", books=" + books + '}';
     }
 }
