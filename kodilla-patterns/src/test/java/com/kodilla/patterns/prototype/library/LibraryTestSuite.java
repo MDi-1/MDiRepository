@@ -1,14 +1,17 @@
 package com.kodilla.patterns.prototype.library;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LibraryTestSuite {
+    Library lib = new Library("biblioteka źródłowa");
 
-    @Test
-    void testGetBooks() {
-        Library lib = new Library("biblioteka źródłowa");
+    @BeforeAll
+    static void prepareData() {
+
+        System.out.println("]]]] kodilla zadanie 15.2 Library [[[[");
 
         Book ks1 = new Book("Dom dzienny, dom nocny",   "Olga Tokarczuk", LocalDate.of(1998, 1, 1));
         Book ks2 = new Book("Lśnienie",                 "Stephen King",   LocalDate.of(1977, 1, 1));
@@ -28,6 +31,24 @@ public class LibraryTestSuite {
         lib.getBooks().add(ks7);
         lib.getBooks().add(ks8);
 
+    }
+
+    @Test
+    void testGetBooksDefaultLibrary() {
+
+
+
+        // when
+        lib.getBooks().remove(ks2);
+        lib.getBooks().remove(ks4);
+
+        // then
+        System.out.println(lib);
+        assertEquals(6, lib.getBooks().size());
+    }
+
+    @Test
+    void testGetBooksShallowCopiedLibrary() {
         Library shallowClone = null;
         try {
             shallowClone = lib.shallowCopy();
@@ -35,7 +56,13 @@ public class LibraryTestSuite {
             System.out.println(e);
         }
         shallowClone.setName("biblioteka skopiowana płytko");
+        System.out.println(shallowClone);
 
+        assertEquals(6, shallowClone.getBooks().size());
+
+    }
+    @Test
+    void testGetBooksDeepCopiedLibrary() {
         Library deepClone = null;
         try {
             deepClone = lib.deepCopy();
@@ -43,5 +70,8 @@ public class LibraryTestSuite {
             System.out.println(e);
         }
         deepClone.setName("biblioteka skopiowana głęboko");
+        System.out.println(deepClone);
+
+        assertEquals(8, deepClone.getBooks().size());
     }
 }
