@@ -43,6 +43,5 @@ public class LibraryTestSuite {
             System.out.println(e);
         }
         deepClone.setName("biblioteka skopiowana głęboko");
-
     }
 }
