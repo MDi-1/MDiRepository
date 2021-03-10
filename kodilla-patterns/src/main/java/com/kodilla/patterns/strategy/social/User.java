@@ -11,4 +11,8 @@ public class User {
     String sharePost() {
         return publisher.share();
     }
+
+    public void setPublisher(SocialPublisher publisher) {
+        this.publisher = publisher;
+    }
 }
