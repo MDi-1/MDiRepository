@@ -1,0 +1,49 @@
+create table ISSUESLISTS (ID serial primary key, NAME varchar(40) not null);
+create table ISSUES
+    (
+        ID serial primary key,
+        ISSUELIST_ID bigint unsigned not null,
+        SUMMARY varchar(100) charset UTF8MB4 not null,
+        DESCRIPTION varchar(512) charset UTF8MB4,
+        USER_ID_ASSIGNEDTO bigint unsigned not null,
+        foreign key (ISSUELIST_ID) references ISSUESLISTS(ID),
+        foreign key (USER_ID_ASSIGNEDTO) references USERS(ID)
+    );
+
+insert into ISSUESLISTS (NAME) values ("To Do");
+insert into ISSUESLISTS (NAME) values ("In Progress");
+insert into ISSUESLISTS (NAME) values ("Done");
+
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (1, "resources", "gather project documentation and standards", 2);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (1, "schedule", "set up schedule and deadlines", 1);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (1, "insulation", "model insulation for the hull", 3);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (1, "walls", "model the compartments acc. general arrangement", 4);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (1, "fire integrity", "revise fire protection plan of the ship", 1);
+
+
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (2, "A/C", "air condition, ventilation routing", 2);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (2, "fresh water", "routing of fresh water piping", 3);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (2, "electrical", "cable tray routing, model electric boards", 1);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (2, "fire fighting ", "routing of fire fighting systems", 4);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (2, "deck suppers", "routing of deck scupper piping", 5);
+
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (3, "prefab1", "pipping spools prefabrication", 4);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (3, "prefab2", "duct spools prefabrication", 3);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (3, "compressed air", "compressed air systems", 2);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (3, "finalizing", "rest of systems", 1);
+insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+    values (3, "as built", "as built documentation", 3);
