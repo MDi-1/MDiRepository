@@ -47,3 +47,5 @@ insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
     values (3, "finalizing", "rest of systems", 1);
 insert into ISSUES (ISSUELIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
     values (3, "as built", "as built documentation", 3);
+
+commit;
