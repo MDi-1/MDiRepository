@@ -47,7 +47,8 @@ class DbManagerTestSuite {
         DbManager dbManager = DbManager.getInstance();
 
         //When
-        String sqlQuery = "select U.FIRSTNAME, U.LASTNAME, COUNT(*) as POSTS_QUANTITY from POSTS P join USERS U on U.ID = P.USER_ID group by USER_ID having COUNT(*) >= 2";
+        String sqlQuery = "select U.FIRSTNAME, U.LASTNAME, COUNT(*) as POSTS_QUANTITY " +
+                "from POSTS P join USERS U on U.ID = P.USER_ID group by USER_ID having COUNT(*) >= 2";
         Statement statement = dbManager.getConnection().createStatement();
         ResultSet rs = statement.executeQuery(sqlQuery);
 

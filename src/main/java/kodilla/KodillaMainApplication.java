@@ -1,11 +1,11 @@
-package com.kodilla;
+package kodilla;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KodillaSpringApplication {
+public class KodillaMainApplication {
     public static void main(String[] args) {
-        SpringApplication.run(KodillaSpringApplication.class, args);
+        SpringApplication.run(KodillaMainApplication.class, args);
     }
 }

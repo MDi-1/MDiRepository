@@ -44,7 +44,8 @@ public class StreamMain {
         System.out.println("\n\n\nUsing Stream to generate even numbers from 1 to 20");
         NumbersGenerator.generateEven(20);
 
-        People.getList().stream()
+        People.getList()
+                .stream()
                 .map(String::toUpperCase)
                 .filter(s -> s.length() > 11)
                 .map(s -> s.substring(0, s.indexOf(' ') + 2) + ".")
