@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TaskDaoTestSuite {
 
     @Autowired
-    private TaskDao taskDao; // czy to obiekt w kontenerze?
+    private TaskDao taskDao;
     private static final String DESCRIPTION = "Test: Learn Hibernate";
 
     @Test
