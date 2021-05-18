@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @SpringBootTest
-class CompanyDaoTestSuite {
+    class CompanyDaoTestSuite {
 
     @Autowired
     private CompanyDao companyDao;
