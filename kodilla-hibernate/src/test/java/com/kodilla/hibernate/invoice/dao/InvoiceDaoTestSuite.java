@@ -6,14 +6,11 @@ import com.kodilla.hibernate.invoice.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-@Transactional
 @SpringBootTest
 public class InvoiceDaoTestSuite {
 
@@ -21,9 +18,11 @@ public class InvoiceDaoTestSuite {
     private InvoiceDao invoiceDao;
     private static final String NUMBER = "01-01-2021-invoice_example_number";
 
-    @Rollback(value = false)
     @Test
     void testInvoiceDaoSave() {
+
+        System.out.println("\n]]]] Kodilla exercise 17.3 Invoice [[[[\n");
+
         // given
         Product product1 = new Product("Bread");
         Product product2 = new Product("Butter");
@@ -45,6 +44,6 @@ public class InvoiceDaoTestSuite {
         assertNotEquals(0, id);
 
         // cleanup
-        //invoiceDao.deleteById(id);
+        invoiceDao.deleteById(id);
     }
 }
