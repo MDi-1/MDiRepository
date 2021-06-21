@@ -1,0 +1,13 @@
+1.	In the project participated 7 persons including one mentor in project manager role. Project lasted for one month during which we had to develop backend layer for online store. It’s magnitude can be explained that we had to write five entities into SQL database using variety of relations.
+
+2.	We communicated using chat website provided by school, moreover we had team meetings on Google Meet. All coding work was broken down to single classes as tasks on Jira board. There were few tasks regarding work in Postman software. Some communication was also realized through Github comments on every pull request. Every team member took as many tasks as one could manage. We were also obliged to write down very short daily report about what was done.
+
+3.	In order to assure quality of the code the last operational and approved version was stored on branch “main” of Git repository. It was agreed to create separate branch for every task we worked on. After finished coding for the task and building the project each branch was about to be pushed to remote repository and pull request had to be created. Initially pull requests were reviewed by project manager; then as the project progressed we had to make reviews of our pull requests and merge to main branch by ourselves.
+
+4.	The greatest difficulty in the teamwork especially determined by school’s specific routine was its’ remote teaching character and flexibility. As the result there was no event when everyone would be present and mostly it took a long time for response to come on any question. We could deal with it thanks to specific nature of text messaging channel where anyone could answer at any time, also thanks to version control tools.
+
+5.	The greatest benefits of teamwork were: First, ability to deal with the project scale. I was not big for a single barely experienced developer but for the team of boot-camp students in midcourse was a bit of work. Second, supportive nature of the team.
+
+6.	The most challenging thing for me was to quickly learn Git as the teamwork coordinating tool. That’s because it’s particular version control concept was astonishing for me. Of course different problems appeared here and there while working with the code, but this was expected as programming skills are under early development.
+
+7.	If I had started this project from scratch I would certainly put more pressure to finish SQL diagram faster or moderate the discussion to complete this diagram faster. That’s because it was far more important to deliver working project, than to choose best SQL relation layout. Although the application works after all I wish we had more time to additionally develop front end for this; just to feel it more real.
