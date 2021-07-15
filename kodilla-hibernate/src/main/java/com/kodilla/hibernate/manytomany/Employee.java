@@ -9,6 +9,12 @@ import java.util.List;
         name = "Employee.findUsingLastname",
         query = "FROM Employee WHERE lastname = :LASTNAME"
 )
+
+@NamedQuery(
+        name = "Employee.searchForEmployee",
+        query = "FROM Employee WHERE lastname LIKE '%val%'"
+)
+
 @Entity
 @Table(name = "EMPLOYEES")
 public class Employee {
