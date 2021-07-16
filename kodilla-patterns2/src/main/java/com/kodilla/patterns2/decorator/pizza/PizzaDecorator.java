@@ -7,11 +7,11 @@ public abstract class PizzaDecorator implements PizzaOrder{
         this.order = order;
     }
 
-    public String getDescription() {                              // [6]
+    public String getDescription() {
         return order.getDescription();
     }
 
-    public float getCost() {                                 // [5]
+    public float getCost() {
         return order.getCost();
     }
 }

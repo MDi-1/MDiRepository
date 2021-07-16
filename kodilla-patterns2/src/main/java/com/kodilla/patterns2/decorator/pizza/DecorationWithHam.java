@@ -5,5 +5,11 @@ public class DecorationWithHam extends PizzaDecorator {
         super(order);
     }
 
+    public String getDescription() {
+        return super.getDescription() + ", ham";
+    }
 
+    public float getCost() {
+        return super.getCost() + 7;
+    }
 }
