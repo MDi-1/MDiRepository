@@ -1,6 +1,5 @@
-package com.kodilla.patterns2;
+package com.kodilla.patterns2.aop.calculator;
 
-import com.kodilla.patterns2.aop.calculator.Calculator;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
