@@ -8,7 +8,8 @@ public class Mentor implements Watcher{
         this.name = name;
     }
 
-    public void update(Queue queue) {
+    public void update(Backlog backlog) {
+        Queue queue = (Queue)backlog; // dopisane w trakcie rozmowy z mentorem
         System.out.println(name + ": There is new homework in queue belonging to: " + queue.getStudentName() +
                 " (total: " + queue.getExercises().size() + " exercises)");
         updatesQuantity++;
