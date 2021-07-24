@@ -1,0 +1,14 @@
+DROP FUNCTION IF EXISTS getUserName;
+
+DELIMITER $$
+CREATE FUNCTION getUserName(id INT) RETURNS VARCHAR(20) DETERMINISTIC
+BEGIN
+    DECLARE resultName VARCHAR(20) DEFAULT 'incorrect ID given';
+    IF id >= 0 THEN
+        SELECT FIRSTNAME INTO resultName FROM readers WHERE READER_ID = id;
+    END IF;
+    RETURN resultName;
+END $$
+DELIMITER ;
+
+SELECT getUserName(4) AS NAME;

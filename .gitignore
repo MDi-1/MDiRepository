@@ -1,4 +1,5 @@
 HELP.md
+trello.cfg
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
